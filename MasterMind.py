@@ -9,23 +9,19 @@ A personal project to practice various programming concepts such as:
 The goal is to implement the classic MasterMind game while learning
 how to structure a project and separate logic from UI.
 
-Author: [Your Name]
+Author: Naymeer
 """
 
 import pygame
+from config import *
+import Button as button
 import random
 
-nb_gess = 10
-nb_pawn = 4
-
 pygame.init()
-smallfont = pygame.font.SysFont(None,35)
-screen = pygame.display.set_mode((800, 600))
+smallfont = pygame.font.SysFont(font, font_size)
+screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-
-
-import Button as button
 
 def starting():
     print("Game start")
@@ -33,7 +29,7 @@ def starting():
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("purple")
     print("init buttons")
-    Bstop = button.Button("Quit",(150, 120, 100, 50), (0, 200, 100), stop)
+    Bstop = button.Button("Quit", width/2-button_width/2, height/2-button_height/2 , button_width, button_height, (255, 0, 0 ), stop)
     Bstop.draw(screen)
 
 
