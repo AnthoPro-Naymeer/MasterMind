@@ -43,5 +43,5 @@ class Button:
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.rect.collidepoint(event.pos):
+            if self.rec.collidepoint(event.pos):
                 self.action()

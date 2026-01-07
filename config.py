@@ -25,3 +25,6 @@ button_width = 75
 button_height = 50
 font = 'Helvetica'
 font_size = 35
+
+mods = ['One try', 'Time trial']
+multiplayer_mods = ['Screen share', 'LAN', 'Online']

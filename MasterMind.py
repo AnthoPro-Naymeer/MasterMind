@@ -23,36 +23,46 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
-def starting():
-    print("Game start")
-    running = True
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
-    print("init buttons")
-    Bstop = button.Button("Quit", width/2-button_width/2, height/2-button_height/2 , button_width, button_height, (255, 0, 0 ), stop)
-    Bstop.draw(screen)
+
+def play():
+    print("Play")
+    Bsolo.draw(screen)
+    Bduo.draw(screen)
+
+def quit():
+    global running
+    running = False
+    print("Quit")
 
 
-def stop():
-    running=False
-    print("Game stop")
-    pygame.quit()
+def player_count_selection(player_count):
+    print("Select player count")
+    if player_count == 'Solo':
+        print("Solo mode selected")
+    else:
+        print("Duo mode selected")
 
-starting()
+
+Bstart = button.Button("Start", width/2-button_width/2, height/2-button_height-30 , button_width, button_height, (0, 255, 0 ), play)
+Bstop = button.Button("Quit", width/2-button_width/2, height/2-button_height+30, button_width, button_height, (255, 0, 0 ), quit)
+Bsolo = button.Button("Solo", width/2-button_width/2, height/2-button_height-30 , button_width, button_height, (0, 255, 0 ), player_count_selection('Solo'))
+Bduo = button.Button("Duo", width/2-button_width/2, height/2-button_height+30, button_width, button_height, (0, 255, 0 ), player_count_selection('Duo'))
+
 while running:
     for event in pygame.event.get():
-        match event.type:
-            case pygame.QUIT:
-                running = False
-                break;
+        if event.type == pygame.QUIT:
+            running = False
+        Bstart.handle_event(event)
+        Bstop.handle_event(event)
+        Bsolo.handle_event(event)
+        Bduo.handle_event(event)
 
-            case pygame.MOUSEBUTTONDOWN:
-                exit
+    screen.fill("purple")
 
+    Bstart.draw(screen)
+    Bstop.draw(screen)
 
-    # RENDER YOUR GAME HERE
-
-    # flip() the display to put your work on screen
     pygame.display.flip()
-
     clock.tick(60)
+
+pygame.quit()
