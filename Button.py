@@ -28,6 +28,7 @@ class Button:
         self.color = color
         self.font = pygame.font.SysFont(font, font_size)
         self.action = action
+        self.active = False
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rec, border_radius = 10)
@@ -43,5 +44,13 @@ class Button:
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.rec.collidepoint(event.pos):
+            if self.rec.collidepoint(event.pos) and self.active:
                 self.action()
+                self.active = not self.active
+    
+    def Is_active(self):
+        """
+        This fonction unable or disable the buttons according on which menu you're on
+
+        """
+        self.active =  not self.active

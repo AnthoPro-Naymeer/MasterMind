@@ -12,6 +12,7 @@ how to structure a project and separate logic from UI.
 Author: Naymeer
 """
 
+from re import L
 import pygame
 from config import *
 import Button as button
@@ -22,12 +23,14 @@ smallfont = pygame.font.SysFont(font, font_size)
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
+global menu
+menu = 'start'
 
 
 def play():
     print("Play")
-    Bsolo.draw(screen)
-    Bduo.draw(screen)
+    global menu
+    menu = 'play'
 
 def quit():
     global running
@@ -45,8 +48,8 @@ def player_count_selection(player_count):
 
 Bstart = button.Button("Start", width/2-button_width/2, height/2-button_height-30 , button_width, button_height, (0, 255, 0 ), play)
 Bstop = button.Button("Quit", width/2-button_width/2, height/2-button_height+30, button_width, button_height, (255, 0, 0 ), quit)
-Bsolo = button.Button("Solo", width/2-button_width/2, height/2-button_height-30 , button_width, button_height, (0, 255, 0 ), player_count_selection('Solo'))
-Bduo = button.Button("Duo", width/2-button_width/2, height/2-button_height+30, button_width, button_height, (0, 255, 0 ), player_count_selection('Duo'))
+Bsolo = button.Button("Solo", width/2-button_width/2, height/2-button_height-30 , button_width, button_height, (0, 255, 0 ), lambda : player_count_selection('Solo'))
+Bduo = button.Button("Duo", width/2-button_width/2, height/2-button_height+30, button_width, button_height, (0, 255, 0 ), lambda : player_count_selection('Duo'))
 
 while running:
     for event in pygame.event.get():
@@ -58,9 +61,19 @@ while running:
         Bduo.handle_event(event)
 
     screen.fill("purple")
+    match menu:
+        case 'start':
+            Bstart.draw(screen)
+            Bstart.Is_active()
+            Bstop.draw(screen)
+            Bstop.Is_active()
+        case 'play':
+            Bsolo.draw(screen)
+            Bsolo.Is_active()
+            Bduo.draw(screen)
+            Bduo.Is_active()
+            
 
-    Bstart.draw(screen)
-    Bstop.draw(screen)
 
     pygame.display.flip()
     clock.tick(60)
