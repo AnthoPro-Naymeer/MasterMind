@@ -17,14 +17,18 @@ Main variables:
 
 import pygame
 
-nb_gess = 10
-nb_pawn = 4
 width = 800
 height = 600
 button_width = 75
 button_height = 50
+
+
 font = 'Helvetica'
 font_size = 35
 
 mods = ['One try', 'Time trial']
 multiplayer_mods = ['Screen share', 'LAN', 'Online']
+
+nb_gess = 10
+nb_pawn = 4
+possible_pawn = 5

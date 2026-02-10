@@ -18,7 +18,7 @@ from config import *
 
 class Button:
 
-    def __init__(self, name, x, y , width, height, color, action):
+    def __init__(self, name, x, y , width, height, color, action, active=false):
         self.name = name
         self.x = x
         self.y = y
@@ -28,7 +28,7 @@ class Button:
         self.color = color
         self.font = pygame.font.SysFont(font, font_size)
         self.action = action
-        self.active = False
+        self.active = active
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rec, border_radius = 10)
